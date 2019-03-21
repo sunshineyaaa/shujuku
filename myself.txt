@@ -1,0 +1,80 @@
+    public double findMedianSortedArrays(int[] A, int[] B) {
+        // write your code here
+     int m=A.length;
+	int n=B.length;
+	if (m>n)
+	{
+		int [] Templates=A;A=B;B=Templates;
+	int te=m;m=n;n=te; 
+	}
+	int min=0,max=m,half=(m+n+1)/2;
+	while(min<=max)
+	{
+		int i=(min+max)/2;
+		int j=half-i;
+		if(i<max&&B[j-1]>A[i])
+		{
+			min=i+1;
+		}//i is too small
+		else if
+		(i>min&&A[i-1]>B[j])
+		{
+			max=i-1;
+		}//i is too big
+		else
+		{
+			int maxleft=0;
+			if(i==0)
+			{
+				maxleft=B[j-1];
+			}
+			else if 
+			(j==0) {
+				maxleft=A[i-1];
+			}
+			else {
+				maxleft=Math.max(A[i-1],B[j-1]);
+			}
+			if((m+n)%2==1)
+				return maxleft;
+			int minlight=0;
+			if(i==m)
+			{
+				minlight=B[j];
+			}
+			else if 
+			(j==n)
+			{
+				minlight=A[i];
+			}
+			else 
+			{
+				minlight=Math.min(B[j],A[i]);
+			}
+			return (maxleft+minlight)/2.0;
+		}
+		
+		
+	}
+	return 0.0;
+    }
+   public static void main (String[] args) {
+       Solution t=new Solution();
+        Scanner in =new Scanner (System.in); 
+         int i=0;
+         int j=0;
+        	 int [] a =new int[8];
+             while(a[i]!='\n')
+             {
+             a[i]=in.nextInt();
+             }
+             int [] b=new int [5];
+             while(b[j]!='\n')
+             {
+            	 b[j]=in.nextInt();
+             }
+        double ut=t.findMedianSortedArrays(a, b);
+       System.out.println(ut);
+        
+    }
+}
